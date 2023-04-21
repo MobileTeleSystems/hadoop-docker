@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  hive2:
+    image: ${HIVE_IMAGE:-mtsrus/hadoop:hadoop2-hive}
+    restart: unless-stopped
+    container_name: hive2
+    hostname: hive2
+    depends_on:
+    - postgres
+    ports:
+    - 50070:50070  # WebHDFS
+    - 10000:10000  # Hive Thrift server
+    volumes:
+      # put some .xml files in /var/hive/conf/ to override defaults
+    - ./conf/hive/:/var/hive/conf/
+    - hadoop-data:/var/hadoop/data/
+
+  postgres:
+    image: postgres:alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: metastore
+      POSTGRES_USER: hive2
+      POSTGRES_PASSWORD: hive2
+    ports:
+    - 5432:5432
+    volumes:
+    - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  hadoop-data:
+  postgres-data:
