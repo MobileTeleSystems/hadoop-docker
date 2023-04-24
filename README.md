@@ -16,8 +16,11 @@ All-in-one HDFS container with:
 
 ### Versions
 
-* `mtsrus/hadop:hadoop2-hdfs` - based on Hadoop 2.7.3
-* `mtsrus/hadop:hadoop3-hdfs` - based on Hadoop 3.3.5
+* `mtsrus/hadop:hadoop2.7.3-hdfs`
+* `mtsrus/hadop:hadoop2-hdfs` - same as above
+
+* `mtsrus/hadop:hadoop3.3.5-hdfs`
+* `mtsrus/hadop:hadoop3-hdfs` - same as above
 
 ### Prerequisites
 
@@ -79,8 +82,11 @@ All-in-one Yarn container with:
 
 ### Versions
 
-* `mtsrus/hadop:hadoop2-yarn` - based on Hadoop 2.7.3
-* `mtsrus/hadop:hadoop3-yarn` - based on Hadoop 3.3.5
+* `mtsrus/hadop:hadoop2.7.3-yarn`
+* `mtsrus/hadop:hadoop2-yarn` - same as above
+
+* `mtsrus/hadop:hadoop3.3.5-yarn`
+* `mtsrus/hadop:hadoop3-yarn` - same as above
 
 ### Prerequisites
 
@@ -145,8 +151,11 @@ All-in-one Hive container with:
 
 ### Versions
 
-*`*mtsrus/hadop:hadoop2-hive` - based on Hadoop 2.7.3 + Hive 2.1.1
-*`*mtsrus/hadop:hadoop3-hive` - based on Hadoop 3.3.5 + Hive 3.1.3
+* `mtsrus/hadop:hadoop2.7.3-hive2.1.1`
+* `mtsrus/hadop:hadoop2-hive` - same as above
+
+* `mtsrus/hadop:hadoop3.3.5-hive3.1.3`
+* `mtsrus/hadop:hadoop3-hive` - same as above
 
 ### Prerequisites
 
