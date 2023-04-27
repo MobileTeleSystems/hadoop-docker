@@ -42,7 +42,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         tags: |
-          mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-hdfs
+          mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hdfs
           mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hdfs
           mtsrus/hadoop:hadoop${{ matrix.hadoop-major-version }}-hdfs
         context: ./hdfs
@@ -60,12 +60,12 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         tags: |
-          mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-yarn
+          mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-yarn
           mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-yarn
           mtsrus/hadoop:hadoop${{ matrix.hadoop-major-version }}-yarn
         context: ./yarn
         build-args: |
-          BASE_IMAGE=mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-hdfs
+          BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hdfs
         pull: true
         push: true
         platform: |
@@ -78,13 +78,13 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         tags: |
-          mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
+          mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
           mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
           mtsrus/hadoop:hadoop${{ matrix.hadoop-major-version }}-hive
         context: ./hive
         build-args: |
           HIVE_VERSION=${{ matrix.hive-version }}
-          BASE_IMAGE=mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-yarn
+          BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-yarn
         pull: true
         push: true
         platform: |
