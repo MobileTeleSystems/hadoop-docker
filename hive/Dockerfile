@@ -9,6 +9,7 @@ RUN wget -q https://archive.apache.org/dist/hive/hive-${HIVE_VERSION}/apache-hiv
     tar -xzf apache-hive-${HIVE_VERSION}-bin.tar.gz && \
     rm apache-hive-${HIVE_VERSION}-bin.tar.gz && \
     mv apache-hive-${HIVE_VERSION}-bin $HIVE_HOME && \
+    rm -rf $HIVE_HOME/examples/ && \
     wget -q https://repo1.maven.org/maven2/org/postgresql/postgresql/42.6.0/postgresql-42.6.0.jar && \
     mv postgresql-42.6.0.jar $HIVE_HOME/lib/
 

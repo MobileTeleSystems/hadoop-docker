@@ -1,6 +1,5 @@
 FROM eclipse-temurin:8-jre
 
-ARG HADOOP_MAJOR_VERSION=2.7
 ARG HADOOP_VERSION=2.7.3
 
 ENV HADOOP_HOME /opt/hadoop
@@ -13,7 +12,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y openssh-client 
 RUN wget -q http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
     tar -xzf hadoop-${HADOOP_VERSION}.tar.gz && \
     rm hadoop-${HADOOP_VERSION}.tar.gz && \
-    mv hadoop-${HADOOP_VERSION} $HADOOP_HOME
+    mv hadoop-${HADOOP_VERSION} $HADOOP_HOME && \
+    rm -rf $HADOOP_HOME/share/doc/ && \
+    find $HADOOP_HOME -name "*-tests.jar" -delete && \
+    find $HADOOP_HOME -name "*-sources.jar" -delete
 
 COPY conf/ssh_config /root/.ssh/config
 RUN for user in hadoop hdfs yarn mapred; do \
