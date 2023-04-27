@@ -50,7 +50,7 @@ jobs:
           HADOOP_VERSION=${{ matrix.hadoop-version }}
         pull: true
         push: true
-        platform: |
+        platforms: |
           linux/amd64
           linux/arm64
           linux/arm/v7
@@ -68,7 +68,7 @@ jobs:
           BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hdfs
         pull: true
         push: true
-        platform: |
+        platforms: |
           linux/amd64
           linux/arm64
           linux/arm/v7
@@ -87,7 +87,7 @@ jobs:
           BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-yarn
         pull: true
         push: true
-        platform: |
+        platforms: |
           linux/amd64
           linux/arm64
           linux/arm/v7
