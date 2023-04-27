@@ -1,0 +1,94 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - .*
+
+jobs:
+  release:
+    name: Build & push images to Dockerhub (Hadoop ${{ matrix.hadoop-version }}, Hive ${{ matrix.hive-version }})
+    runs-on: ubuntu-latest
+    if: github.repository == 'MobileTeleSystems/hadoop-docker'  # prevent running on forks
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - hadoop-major-version: 2
+          hadoop-version: 2.7.3
+          hive-version: 2.1.1
+        - hadoop-major-version: 3
+          hadoop-version: 3.3.5
+          hive-version: 3.1.3
+
+    steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build HDFS
+      uses: docker/build-push-action@v4
+      with:
+        tags: |
+          mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-hdfs
+          mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hdfs
+          mtsrus/hadoop:hadoop${{ matrix.hadoop-major-version }}-hdfs
+        context: ./hdfs
+        build-args: |
+          HADOOP_VERSION=${{ matrix.hadoop-version }}
+        pull: true
+        push: true
+        platform: |
+          linux/amd64
+          linux/arm64
+          linux/arm/v7
+        provenance: max
+
+    - name: Build Yarn
+      uses: docker/build-push-action@v4
+      with:
+        tags: |
+          mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-yarn
+          mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-yarn
+          mtsrus/hadoop:hadoop${{ matrix.hadoop-major-version }}-yarn
+        context: ./yarn
+        build-args: |
+          BASE_IMAGE=mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-hdfs
+        pull: true
+        push: true
+        platform: |
+          linux/amd64
+          linux/arm64
+          linux/arm/v7
+        provenance: max
+
+    - name: Build Hive
+      uses: docker/build-push-action@v4
+      with:
+        tags: |
+          mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
+          mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
+          mtsrus/hadoop:hadoop${{ matrix.hadoop-major-version }}-hive
+        context: ./hive
+        build-args: |
+          HIVE_VERSION=${{ matrix.hive-version }}
+          BASE_IMAGE=mtsrus/hadoop:${{ env.GITHUB_REF_SLUG }}-hadoop${{ matrix.hadoop-version }}-yarn
+        pull: true
+        push: true
+        platform: |
+          linux/amd64
+          linux/arm64
+          linux/arm/v7
+        provenance: max

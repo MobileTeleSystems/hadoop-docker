@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  hdfs:
+    image: ${YARN_IMAGE:-mtsrus/hadoop:hadoop2-yarn}
+    restart: unless-stopped
+    container_name: hadoop
+    hostname: hadoop
+    environment:
+    - WITH_MAPREDUCE=true
+    ports:
+    - 50070:50070  # WebHDFS
+    - 8020:8020  # HDFS IPC
+    - 9000:9000  # HDFS IPC
+    - 8088:8088  # Yarn UI
+    - 8030:8030  # Scheduler
+    - 8025:8025  # ResourceManager http
+    - 8050:8050  # ResourceManager IPC
+    - 8042:8042  # NodeManager UI
+    - 8188:8188 # Timeline server
+    - 10020:10020 # MapReduce JobServer
+    - 19888:19888 # MapReduce JobServer History
+    volumes:
+      # put some .xml files in /var/hadoop/conf/ to override defaults
+    - ./conf/hadoop/:/var/hadoop/conf/
+    - hadoop-data:/var/hadoop/data/
+
+volumes:
+  hadoop-data:

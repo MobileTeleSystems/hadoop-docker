@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  hdfs:
+    image: ${HDFS_IMAGE:-mtsrus/hadoop:hadoop2-hdfs}
+    restart: unless-stopped
+    container_name: hdfs
+    hostname: hdfs
+    ports:
+    - 50070:50070  # WebHDFS
+    - 8020:8020  # HDFS IPC
+    - 9000:9000  # HDFS IPC
+    volumes:
+      # put some .xml files in /var/hadoop/conf/ to override defaults
+    - ./conf/hadoop/:/var/hadoop/conf/
+    - hadoop-data:/var/hadoop/data/
+
+volumes:
+  hadoop-data:
