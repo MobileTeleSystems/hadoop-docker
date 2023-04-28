@@ -14,7 +14,6 @@ RUN wget -q http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION
     rm hadoop-${HADOOP_VERSION}.tar.gz && \
     mv hadoop-${HADOOP_VERSION} $HADOOP_HOME && \
     rm -rf $HADOOP_HOME/share/doc/ && \
-    find $HADOOP_HOME -name "*-tests.jar" -delete && \
     find $HADOOP_HOME -name "*-sources.jar" -delete
 
 COPY conf/ssh_config /root/.ssh/config

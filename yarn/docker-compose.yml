@@ -1,11 +1,11 @@
 version: '3.7'
 
 services:
-  hdfs:
+  yarn:
     image: ${YARN_IMAGE:-mtsrus/hadoop:hadoop2-yarn}
     restart: unless-stopped
-    container_name: hadoop
-    hostname: hadoop
+    container_name: yarn
+    hostname: yarn
     environment:
     - WITH_MAPREDUCE=true
     ports:

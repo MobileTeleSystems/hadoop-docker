@@ -4,5 +4,5 @@ echo "#################################"
 echo "##      PATCHING HIVE CONF     ##"
 echo "#################################"
 
-cp /var/hive/conf/* /opt/hive/conf/ || true
-sed -i "s/{{hostname}}/$(hostname)/g" /opt/hive/conf/* || true
+cp /var/hive/conf/* ${HIVE_HOME}/conf/ || true
+sed -i "s/{{hostname}}/$(hostname)/g" ${HIVE_HOME}/conf/* || true

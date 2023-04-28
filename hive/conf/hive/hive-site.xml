@@ -34,12 +34,6 @@
     </property>
 
     <property>
-        <name>hive.root.logger</name>
-        <value>INFO,console</value>
-        <description>Logging settings</description>
-    </property>
-
-    <property>
         <name>datanucleus.autoCreateTables</name>
         <value>False</value>
     </property>

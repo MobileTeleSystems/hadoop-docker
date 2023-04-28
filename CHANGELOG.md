@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+* [DOP-3130] Fix missing logs
+
 ## 1.0.1
 
 * [DOP-3130] Remove docs & tests & examples from image
