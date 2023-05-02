@@ -118,12 +118,13 @@ NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 - `8050:8050` - ResourceManager IPC
 - `8088:8088` - Yarn UI
 - `8188:8188` - Timeline server
+- `10020:10020` - MapReduce JobServer
+- `19888:19888` - MapReduce JobServer History
+
 - `9820:9820` - HDFS IPC
 - `9870:9870` - WebHDFS
 - `9864:9864` - Datanode UI
 - `9867:9867` - Datanode IPC
-- `10020:10020` - MapReduce JobServer
-- `19888:19888` - MapReduce JobServer History
 
 ### Configuration
 
@@ -199,12 +200,21 @@ See [docker-compose.yml](hive/docker-compose.yml).
 
 NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 
+- `10000:10000` - Hive Thrift server
+
 - `9820:9820` - HDFS IPC
 - `9870:9870` - WebHDFS
 - `9864:9864` - Datanode UI
-- `9866:9866` - Datanode data port
 - `9867:9867` - Datanode IPC
-- `10000:10000` - Hive Thrift server
+
+- `8025:8025` - ResourceManager http
+- `8030:8030` - Scheduler
+- `8042:8042` - NodeManager UI
+- `8050:8050` - ResourceManager IPC
+- `8088:8088` - Yarn UI
+- `8188:8188` - Timeline server
+- `10020:10020` - MapReduce JobServer
+- `19888:19888` - MapReduce JobServer History
 
 ### Configuration
 
