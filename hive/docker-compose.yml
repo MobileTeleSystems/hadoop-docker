@@ -9,7 +9,10 @@ services:
     depends_on:
     - postgres
     ports:
+    - 8020:8020  # HDFS IPC
+    - 9000:9000  # HDFS IPC
     - 50070:50070  # WebHDFS
+    - 50075:50075  # Datanode UI
     - 10000:10000  # Hive Thrift server
     volumes:
       # put some .xml files in /var/hive/conf/ to override defaults
