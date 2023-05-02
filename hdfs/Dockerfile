@@ -38,15 +38,17 @@ VOLUME /var/hadoop/data
 
 # Source: https://ambari.apache.org/1.2.3/installing-hadoop-using-ambari/content/reference_chap2_1.html
 
-# Namenode IPC ports
-EXPOSE 8020
-EXPOSE 9000
+# Namenode IPC port
+EXPOSE 9820
 
 # Namenode WebHDFS port
-EXPOSE 50070
+EXPOSE 9870
 
 # Datanode UI port
-EXPOSE 50075
+EXPOSE 9864
+
+# Datanode IPC port
+EXPOSE 9867
 
 COPY conf/hadoop/* $HADOOP_CONF_DIR/
 COPY scripts/ /scripts/

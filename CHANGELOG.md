@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+* [DOP-3130] Use same ports for Hadoop 2 & 3
+
 ## 1.0.2
 
 * [DOP-3130] Fix missing logs

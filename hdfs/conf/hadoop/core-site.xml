@@ -19,7 +19,7 @@
 <configuration>
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://{{hostname}}:9000</value>
+        <value>hdfs://{{hostname}}:9820</value>
     </property>
     <property>
         <name>hadoop.proxyuser.root.hosts</name>
