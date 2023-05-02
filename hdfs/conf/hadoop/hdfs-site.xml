@@ -33,25 +33,20 @@
         <name>dfs.webhdfs.enabled</name>
         <value>true</value>
     </property>
+    <!--
+      Hadoop 2 have different port numbers than Hadoop 3:
+        https://hadoop.apache.org/docs/r2.7.3/hadoop-yarn/hadoop-yarn-common/yarn-default.xml
+        https://hadoop.apache.org/docs/r3.3.5/hadoop-yarn/hadoop-yarn-common/yarn-default.xml
+
+      Prefer Hadoop 3 ports for unification.
+    -->
     <property>
         <name>dfs.namenode.http-address</name>
         <value>0.0.0.0:9870</value>
     </property>
     <property>
-        <name>dfs.namenode.http-bind-host</name>
-        <value>0.0.0.0</value>
-    </property>
-    <property>
         <name>dfs.namenode.rpc-address</name>
         <value>0.0.0.0:9820</value>
-    </property>
-    <property>
-        <name>dfs.namenode.rpc-bind-host</name>
-        <value>0.0.0.0</value>
-    </property>
-    <property>
-        <name>dfs.namenode.servicerpc-bind-host</name>
-        <value>0.0.0.0</value>
     </property>
     <property>
         <name>dfs.namenode.secondary.http-address</name>
@@ -68,6 +63,18 @@
     <property>
         <name>dfs.datanode.ipc.address</name>
         <value>0.0.0.0:9867</value>
+    </property>
+    <property>
+        <name>dfs.namenode.http-bind-host</name>
+        <value>0.0.0.0</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-bind-host</name>
+        <value>0.0.0.0</value>
+    </property>
+    <property>
+        <name>dfs.namenode.servicerpc-bind-host</name>
+        <value>0.0.0.0</value>
     </property>
     <property>
         <name>fs.checkpoint.dir</name>
