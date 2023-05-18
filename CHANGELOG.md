@@ -3,6 +3,7 @@
 ## 1.3.1
 
 * [DOP-4594] Revert: Upgrade hdfs data during start
+* [DOP-4594] Log services are ready
 
 ## 1.3.0
 
