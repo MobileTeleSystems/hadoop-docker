@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.1
+
+* [DOP-4594] Revert: Upgrade hdfs data during start
+
 ## 1.3.0
 
 * [DOP-4594] Increase memory limit per process to 512Mb
