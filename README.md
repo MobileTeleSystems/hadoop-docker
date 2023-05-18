@@ -207,7 +207,6 @@ NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 - `9864:9864` - Datanode UI
 - `9867:9867` - Datanode IPC
 
-- `8025:8025` - ResourceManager http
 - `8030:8030` - Scheduler
 - `8042:8042` - NodeManager UI
 - `8050:8050` - ResourceManager IPC

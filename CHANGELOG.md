@@ -1,10 +1,11 @@
 # Changelog
 
-## 1.3.1
+## 1.4.0
 
 * [DOP-4594] Revert: Upgrade hdfs data during start
-* [DOP-4594] Log services are ready
+* [DOP-4594] Log then services are ready
 * [DOP-4594] Add `|SERVICE|` prefix to log lines
+* [DOP-4594] Add YARN ports to Hive docker-compose.yml
 
 ## 1.3.0
 

@@ -15,6 +15,13 @@ services:
     - 9866:9866  # Datanode data port
     - 9867:9867  # Datanode IPC
     - 10000:10000  # Hive Thrift server
+    - 8030:8030  # Scheduler
+    - 8042:8042  # NodeManager UI
+    - 8050:8050  # ResourceManager IPC
+    - 8088:8088  # Yarn UI
+    - 8188:8188  # Timeline server
+    - 10020:10020  # MapReduce JobServer
+    - 19888:19888  # MapReduce JobServer History
     volumes:
       # put some .xml files in /var/hive/conf/ to override defaults
     - ./conf/hive/:/var/hive/conf/
