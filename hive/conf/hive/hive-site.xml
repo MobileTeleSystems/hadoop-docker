@@ -3,7 +3,7 @@
 <configuration>
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:postgresql://postgres:5432/metastore</value>
+        <value>jdbc:postgresql://{{POSTGRES_HOST}}:{{POSTGRES_PORT}}/{{POSTGRES_DB}}</value>
         <description>JDBC connect string for a JDBC metastore</description>
     </property>
     <property>
@@ -13,12 +13,12 @@
 
     <property>
         <name>javax.jdo.option.ConnectionUserName</name>
-        <value>hive2</value>
+        <value>{{POSTGRES_USER}}</value>
     </property>
 
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
-        <value>hive2</value>
+        <value>{{POSTGRES_PASSWORD}}</value>
     </property>
 
     <property>

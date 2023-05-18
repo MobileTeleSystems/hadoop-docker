@@ -233,14 +233,19 @@ HDFS and Yarn configs still can be passed to `var/hadoop/conf` directory.
 The following substitutions are replaced with proper values:
 
 * `{{hostname}}` - current hostname
+* `{{POSTGRES_HOST}}` - `POSTGRES_HOST` env variable (default `postgres`)
+* `{{POSTGRES_PORT}}` - `POSTGRES_PORT` env variable (default `5432`)
+* `{{POSTGRES_DB}}` - `POSTGRES_DB` env variable (default `metastore`)
+* `{{POSTGRES_USER}}` - `POSTGRES_USER` env variable (default `hive2`)
+* `{{POSTGRES_PASSWORD}}` - `POSTGRES_PASSWORD` env variable (default `hive2`)
 
 #### Metastore
 
-By default Hive connects to `jdbc:postgresql://postgres:5432/metastore`. Postgres JDBC jar package is embedded into image.
+Hive connects to `jdbc:postgresql://{{POSTGRES_USER}}:{{POSTGRES_PASSWORD}}@{{POSTGRES_HOST}}:{{POSTGRES_PORT}}/{{POSTGRES_DB}}`. Postgres JDBC jar package is embedded into image.
 
-You can change connection url by updating the `/var/hive/conf/hive-site.xml` file.
+You can change URL components by setting environment variables mentioned above, or replace the entire URL by updating the `/var/hive/conf/hive-site.xml` file.
 
-You can also use any other supported RDMBS, like MySQL, by changing connection URL and embedding/mounting JDBC driver to `/opt/hive/lib/drivername.jar` path inside contained.
+You can also use any other supported RDMBS, like MySQL, by changing connection URL and embedding/mounting JDBC driver to `/opt/hive/lib/drivername.jar` path inside container.
 
 #### Container env variables
 

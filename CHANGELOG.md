@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0
+
+* [DOP-4594] Add substitutions support in metastore URL
+
 ## 1.1.0
 
 * [DOP-3130] Use same ports for Hadoop 2 & 3
