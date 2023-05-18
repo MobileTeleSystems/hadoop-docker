@@ -4,6 +4,7 @@
 
 * [DOP-4594] Revert: Upgrade hdfs data during start
 * [DOP-4594] Log services are ready
+* [DOP-4594] Add `|SERVICE|` prefix to log lines
 
 ## 1.3.0
 
