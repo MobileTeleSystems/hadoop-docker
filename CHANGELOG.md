@@ -2,7 +2,7 @@
 
 ## 1.3.0
 
-* [DOP-4594] Increase max memory limit to 512Mb
+* [DOP-4594] Increase memory limit per process to 512Mb
 
 ## 1.2.1
 

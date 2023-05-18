@@ -6,7 +6,7 @@ echo "--------------- FORMATTING DATA DIRECTORY ---------------"
 $HADOOP_HOME/bin/hdfs namenode -format -nonInteractive || true
 
 echo "--------------- STARTING HDFS NODES ---------------"
-$HADOOP_HOME/sbin/start-dfs.sh -upgrade
+$HADOOP_HOME/sbin/start-dfs.sh
 tail -F -n 1000 /opt/hadoop/logs/hadoop-root-namenode-*.out &
 tail -F -n 1000 /opt/hadoop/logs/hadoop-root-datanode-*.out &
 
