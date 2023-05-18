@@ -3,6 +3,7 @@
 ## 1.2.0
 
 * [DOP-4594] Add substitutions support in metastore URL
+* [DOP-4594] Use archive.apache.org only as fallback
 
 ## 1.1.0
 
