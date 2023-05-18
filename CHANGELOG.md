@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0
+
+* [DOP-4594] Increase max memory limit to 512Mb
+
 ## 1.2.1
 
 * [DOP-4594] Use https://dlcdn.apache.org instead of https://apache.org/dist

@@ -25,7 +25,7 @@ All-in-one HDFS container with:
 ### Prerequisites
 
 * 2 CPU core
-* 1Gb RAM
+* 2Gb RAM
 * 1Gb storage
 
 ### Examples
@@ -67,7 +67,7 @@ The following substitutions are replaced with proper values:
 
 ##### Defaults
 
-* `export HADOOP_HEAPSIZE=256` - max JVM memory in megabytes, applied for all Hadoop components (if no overrides)
+* `export HADOOP_HEAPSIZE=512` - max JVM memory in megabytes, applied for all Hadoop components (if no overrides)
 
 If container fails with `OutOfMemory`, you should increase this value, e.g. up to `1024` or `2048`.
 
@@ -101,7 +101,7 @@ All-in-one Yarn container with:
 ### Prerequisites
 
 * 2 CPU core
-* 2Gb RAM
+* 3Gb RAM
 * 1Gb storage
 
 ### Examples
@@ -188,7 +188,7 @@ All-in-one Hive container with:
 ### Prerequisites
 
 * 2 CPU core
-* 2Gb RAM
+* 5Gb RAM
 * 1Gb storage
 * Running Postgres instance to operate Metastore
 
@@ -262,7 +262,7 @@ See Yarn image documentation.
 
 #### `/var/hive/conf/hive-env.sh` environment variables
 
-* `export HIVE_SERVER2_HEAPSIZE=256` - max JVM memory in megabytes
+* `export HIVE_SERVER2_HEAPSIZE=512` - max JVM memory in megabytes
 
 See https://mr3docs.datamonad.com/docs/hadoop/guide/run-hiveserver2/
 
