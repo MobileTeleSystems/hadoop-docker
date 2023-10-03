@@ -2,11 +2,16 @@
 
 set -e
 
+# if there is a log file from previous run, remove it
+rm -rf /opt/hadoop/logs/hadoop-root-namenode-*.out || true
+rm -rf /opt/hadoop/logs/hadoop-root-datanode-*.out || true
+
 echo "--------------- FORMATTING DATA DIRECTORY ---------------"
-$HADOOP_HOME/bin/hdfs namenode -format -nonInteractive || true
+$HADOOP_HOME/bin/hdfs namenode 2>&1 -format -nonInteractive | sed 's/^/| HDFS | /g' || true
 
 echo "--------------- STARTING HDFS NODES ---------------"
-$HADOOP_HOME/sbin/start-dfs.sh
+$HADOOP_HOME/sbin/start-dfs.sh 2>&1 | sed 's/^/| HDFS | /g'
+
 tail -F -n 1000 /opt/hadoop/logs/hadoop-root-namenode-*.out | sed 's/^/| NAMENODE | /g' &
 tail -F -n 1000 /opt/hadoop/logs/hadoop-root-datanode-*.out | sed 's/^/| DATANODE | /g' &
 

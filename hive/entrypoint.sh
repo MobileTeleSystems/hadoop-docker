@@ -13,13 +13,19 @@ else
 
     /scripts/start-sshd.sh
     /scripts/start-hdfs.sh
-    /scripts/init-hdfs.sh
+    /scripts/populate-hdfs.sh
+    /scripts/populate-metastore-db.sh
 
-    /scripts/start-yarn.sh
-    /scripts/start-mr-historyserver.sh
+    if [[ "x$WITH_HIVE_METASTORE_SERVER" == "xtrue" ]]; then
+        # Metastore server fails fast if cannot connect to database
+        /scripts/start-hive-metastore-server.sh
+    fi
 
-    /scripts/init-metastore.sh
-    /scripts/start-hiveserver.sh
+    if [[ "x$WITH_HIVE_SERVER" == "xtrue" ]]; then
+        /scripts/start-yarn.sh
+        /scripts/start-jobhistory-server.sh
+        /scripts/start-hive-server.sh
+    fi
 
     # Hadoop services are started in the background.
     # So we need to start something that runs forever

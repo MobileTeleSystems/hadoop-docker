@@ -16,8 +16,8 @@ else
 
     /scripts/start-yarn.sh
 
-    if [[ "x$WITH_MAPREDUCE" == "xtrue" ]]; then
-        /scripts/start-mr-historyserver.sh
+    if [[ "x$WITH_JOBHISTORY_SERVER" == "xtrue" ]]; then
+        /scripts/start-jobhistory-server.sh
     fi
 
     # Hadoop services are started in the background.

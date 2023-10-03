@@ -15,9 +15,13 @@ RUN wget https://dlcdn.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_V
 
 FROM $BASE_IMAGE
 
+ENV WITH_HIVE_SERVER=true \
+    WITH_HIVE_METASTORE_SERVER=true
+
 ARG HIVE_VERSION=2.3.9
-ENV HIVE_HOME /opt/hive
-ENV PATH $PATH:$HIVE_HOME/bin
+ENV HIVE_VERSION=$HIVE_VERSION\
+    HIVE_HOME=/opt/hive
+ENV PATH=$PATH:$HIVE_HOME/bin
 
 COPY --from=hive-cache $HIVE_HOME $HIVE_HOME
 RUN mkdir -p /var/hive/conf
@@ -25,8 +29,13 @@ RUN mkdir -p /var/hive/conf
 # Override configuration files
 VOLUME /var/hive/conf
 
-# Hive port
+# Hive ports: https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.5.0/bk_reference/content/hive-ports.html
+# Hive server port
 EXPOSE 10000
+# Hive Admin UI port
+EXPOSE 10002
+# Hive Metastore server port
+EXPOSE 9083
 
 COPY conf/hive/* $HIVE_HOME/conf/
 COPY scripts/ /scripts/
@@ -34,4 +43,4 @@ COPY *.sh /
 RUN chmod +x /scripts/*.sh /*.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-HEALTHCHECK --interval=30s --timeout=10s --start-period=360s --retries=3 CMD ["/opt/hive/bin/beeline", "-u", "jdbc:hive2://localhost:10000", "-e", "show databases"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=360s --retries=3 CMD ["/healthcheck.sh"]

@@ -1,27 +1,29 @@
 version: '3.7'
 
 services:
-  hive2:
+  hive:
     image: ${HIVE_IMAGE:-mtsrus/hadoop:hadoop2-hive}
-    restart: unless-stopped
-    container_name: hive2
-    hostname: hive2
+    restart: no
+    container_name: hive
+    hostname: hive
     depends_on:
     - postgres
+    environment:
+      HIVE_METASTORE_DB_URL: jdbc:postgresql://postgres:5432/metastore
+      HIVE_METASTORE_DB_DRIVER: org.postgresql.Driver
+      HIVE_METASTORE_DB_USER: hive
+      HIVE_METASTORE_DB_PASSWORD: hive
     ports:
     - 9820:9820  # HDFS IPC
-    - 9870:9870  # WebHDFS
-    - 9864:9864  # Datanode UI
-    - 9866:9866  # Datanode data port
-    - 9867:9867  # Datanode IPC
-    - 10000:10000  # Hive Thrift server
-    - 8030:8030  # Scheduler
-    - 8042:8042  # NodeManager UI
-    - 8050:8050  # ResourceManager IPC
+    - 9870:9870  # HDFS WebHDFS
+    # if WITH_HIVE_SERVER=true
     - 8088:8088  # Yarn UI
-    - 8188:8188  # Timeline server
-    - 10020:10020  # MapReduce JobServer
-    - 19888:19888  # MapReduce JobServer History
+    - 8042:8042  # NodeManager UI
+    - 10000:10000  # Hive server
+    - 10002:10002  # Hive server Admin UI
+    - 19888:19888  # MapReduce JobServer History UI
+    # if WITH_HIVE_METASTORE_SERVER=true
+    - 9083:9083  # Hive Metastore server
     volumes:
       # put some .xml files in /var/hive/conf/ to override defaults
     - ./conf/hive/:/var/hive/conf/
@@ -32,8 +34,8 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: metastore
-      POSTGRES_USER: hive2
-      POSTGRES_PASSWORD: hive2
+      POSTGRES_USER: hive
+      POSTGRES_PASSWORD: hive
     ports:
     - 5432:5432
     volumes:

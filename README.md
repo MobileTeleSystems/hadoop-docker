@@ -112,19 +112,20 @@ See [docker-compose.yml](yarn/docker-compose.yml).
 
 NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 
+- `9820:9820` - HDFS IPC
+- `9870:9870` - WebHDFS
+- `9864:9864` - Datanode UI
+- `9867:9867` - Datanode IPC
 - `8025:8025` - ResourceManager http
 - `8030:8030` - Scheduler
 - `8042:8042` - NodeManager UI
 - `8050:8050` - ResourceManager IPC
 - `8088:8088` - Yarn UI
 - `8188:8188` - Timeline server
+
+if `WITH_MAPREDUCE=true`:
 - `10020:10020` - MapReduce JobServer
 - `19888:19888` - MapReduce JobServer History
-
-- `9820:9820` - HDFS IPC
-- `9870:9870` - WebHDFS
-- `9864:9864` - Datanode UI
-- `9867:9867` - Datanode IPC
 
 ### Configuration
 
@@ -148,8 +149,8 @@ The following substitutions are replaced with proper values:
 
 #### Container env variables
 
-* `WAIT_TIMEOUT_SECONDS=120` - timeout in seconds after starting each service to check if it is alive
-* `WITH_MAPREDUCE=false` - set to `true` to enable MapReduce
+* `WAIT_TIMEOUT_SECONDS=120` - ti_meout in seconds after starting each service to check if it is alive
+* `WITH_JOBHISTORY_SERVER=false` - set to `true` to start MapReduce JobHistory server
 
 #### `/var/hadoop/conf/hadoop-env.sh` environment variables
 
@@ -200,20 +201,23 @@ See [docker-compose.yml](hive/docker-compose.yml).
 
 NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 
-- `10000:10000` - Hive Thrift server
-
 - `9820:9820` - HDFS IPC
 - `9870:9870` - WebHDFS
 - `9864:9864` - Datanode UI
 - `9867:9867` - Datanode IPC
 
-- `8030:8030` - Scheduler
-- `8042:8042` - NodeManager UI
-- `8050:8050` - ResourceManager IPC
-- `8088:8088` - Yarn UI
-- `8188:8188` - Timeline server
-- `10020:10020` - MapReduce JobServer
-- `19888:19888` - MapReduce JobServer History
+if `WITH_HIVE_SERVER=true`:
+  - `8030:8030` - Scheduler
+  - `8042:8042` - NodeManager UI
+  - `8050:8050` - ResourceManager IPC
+  - `8088:8088` - Yarn UI
+  - `8188:8188` - Timeline server
+  - `10020:10020` - MapReduce JobServer
+  - `19888:19888` - MapReduce JobServer History
+  - `10000:10000` - Hive server
+
+if `WITH_HIVE_SERVER=true`:
+  - `9083:9083` - Hive Metastore server
 
 ### Configuration
 
@@ -232,26 +236,26 @@ HDFS and Yarn configs still can be passed to `var/hadoop/conf` directory.
 The following substitutions are replaced with proper values:
 
 * `{{hostname}}` - current hostname
-* `{{POSTGRES_HOST}}` - `POSTGRES_HOST` env variable (default `postgres`)
-* `{{POSTGRES_PORT}}` - `POSTGRES_PORT` env variable (default `5432`)
-* `{{POSTGRES_DB}}` - `POSTGRES_DB` env variable (default `metastore`)
-* `{{POSTGRES_USER}}` - `POSTGRES_USER` env variable (default `hive2`)
-* `{{POSTGRES_PASSWORD}}` - `POSTGRES_PASSWORD` env variable (default `hive2`)
+* `{{HIVE_METASTORE_DB_URL}}` - `HIVE_METASTORE_DB_URL` env variable (default `jdbc:postgresql://postgres:5432/metastore`)
+* `{{HIVE_METASTORE_DB_DRIVER}}` - `HIVE_METASTORE_DB_DRIVER` env variable (default `org.postgresql.Driver`)
+* `{{HIVE_METASTORE_DB_USER}}` - `HIVE_METASTORE_DB_USER` env variable (default `hive`)
+* `{{HIVE_METASTORE_DB_PASSWORD}}` - `HIVE_METASTORE_DB_PASSWORD` env variable (default `hive`)
 
-#### Metastore
+#### Metastore database
 
-Hive connects to `jdbc:postgresql://{{POSTGRES_USER}}:{{POSTGRES_PASSWORD}}@{{POSTGRES_HOST}}:{{POSTGRES_PORT}}/{{POSTGRES_DB}}`. Postgres JDBC jar package is embedded into image.
+Hive stores metadata in `{{HIVE_METASTORE_DB_URL}}` using driver from `{{HIVE_METASTORE_DB_DRIVER}}`. By default, Postgres is used.
 
 You can change URL components by setting environment variables mentioned above, or replace the entire URL by updating the `/var/hive/conf/hive-site.xml` file.
 
-You can also use any other supported RDMBS, like MySQL, by changing connection URL and embedding/mounting JDBC driver to `/opt/hive/lib/drivername.jar` path inside container.
+You can also use any other supported RDMBS, like MySQL, by changing connection URL and embedding/mounting JDBC driver to `/opt/hive/lib/drivername.jar` path inside container. Postgres JDBC driver is already embedded into image.
 
 #### Container env variables
 
-Same as for HDFS image.
+* `WAIT_TIMEOUT_SECONDS=120` - timeout in seconds after starting each service to check if it is alive
+* `WITH_HIVE_SERVER=true` - set to `false` to disable Hive server
+* `WITH_HIVE_METASTORE_SERVER=true` - set to `false` to disable Hive metastore server
 
 #### `/var/hadoop/conf/hadoop-env.sh` environment variables
-
 
 See HDFS image documentation.
 
@@ -261,7 +265,8 @@ See Yarn image documentation.
 
 #### `/var/hive/conf/hive-env.sh` environment variables
 
-* `export HIVE_SERVER2_HEAPSIZE=512` - max JVM memory in megabytes
+* `export HIVE_SERVER2_HEAPSIZE=512` - max JVM memory in megabytes for Hive server
+* `export HIVE_METASTORE_HEAPSIZE=256` - max JVM memory in megabytes for Hive metastore server
 
 See https://mr3docs.datamonad.com/docs/hadoop/guide/run-hiveserver2/
 

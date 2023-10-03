@@ -1,9 +1,9 @@
 ARG BASE_IMAGE=mtsrus/hadoop:hadoop2-hdfs
 FROM $BASE_IMAGE
 
-ENV WITH_MAPREDUCE=false
+ENV WITH_JOBHISTORY_SERVER=false
 
-# Yarn ports: https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.1.3/administration/content/yarn-ports.html
+# Yarn ports: https://kontext.tech/article/265/default-ports-used-by-hadoop-services-hdfs-mapreduce-yarn
 
 # Scheduler (ApplicationMaster)
 EXPOSE 8030
@@ -18,11 +18,14 @@ EXPOSE 8042
 # ResourceManager UI
 EXPOSE 8088
 
-# MapRecduce ports: https://docs.cloudera.com/HDPDocuments/HDP3/HDP-3.3.5/administration/content/mapreduce-ports.html
+# MapReduce ports: https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cdh_ports.html
 # JobHistory server IPC
 EXPOSE 10020
 # JobHistory server UI
 EXPOSE 19888
+
+# MapReduce Shuffle port:
+EXPOSE 13562
 
 COPY conf/hadoop/* $HADOOP_CONF_DIR/
 COPY scripts/ /scripts/
@@ -30,4 +33,4 @@ COPY *.sh /
 RUN chmod +x /scripts/*.sh /*.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-HEALTHCHECK --interval=30s --timeout=10s --start-period=300s --retries=3 CMD ["curl", "-s", "-f", "http://localhost:8042/jmx?qry=Hadoop:*"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=360s --retries=3 CMD ["/healthcheck.sh"]

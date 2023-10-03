@@ -1,6 +1,7 @@
 FROM eclipse-temurin:8-jre
 
 ARG HADOOP_VERSION=2.7.3
+ENV HADOOP_VERSION=$HADOOP_VERSION
 
 ENV HADOOP_HOME /opt/hadoop
 ENV HADOOP_CONF_DIR /etc/hadoop
@@ -56,4 +57,4 @@ COPY *.sh /
 RUN chmod +x /scripts/*.sh /*.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 CMD ["hdfs", "dfs", "-ls", "/user/root"]
+HEALTHCHECK --interval=30s --timeout=10s --start-period=360s --retries=3 CMD ["/healthcheck.sh"]
