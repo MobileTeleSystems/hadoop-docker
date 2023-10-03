@@ -12,7 +12,7 @@ else
 
     /scripts/start-sshd.sh
     /scripts/start-hdfs.sh
-    /scripts/init-hdfs.sh
+    /scripts/populate-hdfs.sh
 
     /scripts/start-yarn.sh
 
