@@ -9,6 +9,8 @@ services:
     depends_on:
     - postgres
     environment:
+      WITH_HIVE_SERVER: 'true'
+      WITH_HIVE_METASTORE_SERVER: 'true'
       HIVE_METASTORE_DB_URL: jdbc:postgresql://postgres:5432/metastore
       HIVE_METASTORE_DB_DRIVER: org.postgresql.Driver
       HIVE_METASTORE_DB_USER: hive

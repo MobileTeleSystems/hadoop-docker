@@ -11,7 +11,7 @@
 All-in-one HDFS container with:
 
 * HDFS namenode
-* HDFS sacondary namenode
+* HDFS secondary namenode
 * HDFS datanode
 
 ### Versions
@@ -24,8 +24,10 @@ All-in-one HDFS container with:
 
 ### Prerequisites
 
-* 2 CPU core
-* 2Gb RAM
+Minimal resources could start with are:
+
+* 200m CPU
+* 700Mb RAM
 * 1Gb storage
 
 ### Examples
@@ -38,9 +40,6 @@ NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 
 - `9820:9820` - HDFS IPC
 - `9870:9870` - WebHDFS
-- `9864:9864` - Datanode UI
-- `9866:9866` - Datanode data port
-- `9867:9867` - Datanode IPC
 
 ### Configuration
 
@@ -88,7 +87,7 @@ All-in-one Yarn container with:
 * HDFS datanode
 * Yarn ResourceManager
 * Yarn NodeManager
-* MapReduce JobHistory server (if `WITH_MAPREDUCE=true`)
+* MapReduce JobHistory server (if `WITH_JOBHISTORY_SERVER=true`)
 
 ### Versions
 
@@ -100,8 +99,10 @@ All-in-one Yarn container with:
 
 ### Prerequisites
 
-* 2 CPU core
-* 3Gb RAM
+Minimal resources could start with are:
+
+* 400m CPU
+* 1Gb RAM
 * 1Gb storage
 
 ### Examples
@@ -113,17 +114,11 @@ See [docker-compose.yml](yarn/docker-compose.yml).
 NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 
 - `9820:9820` - HDFS IPC
-- `9870:9870` - WebHDFS
-- `9864:9864` - Datanode UI
-- `9867:9867` - Datanode IPC
-- `8025:8025` - ResourceManager http
-- `8030:8030` - Scheduler
+- `9870:9870` - HDFS WebHDFS
 - `8042:8042` - NodeManager UI
-- `8050:8050` - ResourceManager IPC
 - `8088:8088` - Yarn UI
-- `8188:8188` - Timeline server
 
-if `WITH_MAPREDUCE=true`:
+if `WITH_JOBHISTORY_SERVER=true`:
 - `10020:10020` - MapReduce JobServer
 - `19888:19888` - MapReduce JobServer History
 
@@ -176,7 +171,8 @@ All-in-one Hive container with:
 * Yarn ResourceManager
 * Yarn NodeManager
 * MapReduce JobHistory server
-* Hive2 server
+* Hive server
+* Hive Metastore server
 
 ### Versions
 
@@ -188,10 +184,12 @@ All-in-one Hive container with:
 
 ### Prerequisites
 
-* 2 CPU core
-* 5Gb RAM
+Minimal resources could start with are:
+
+* 500m CPU
+* 2Gb RAM
 * 1Gb storage
-* Running Postgres instance to operate Metastore
+* Running RDBMS (e.g. Postgres) instance to operate Metastore
 
 ### Examples
 
@@ -202,21 +200,16 @@ See [docker-compose.yml](hive/docker-compose.yml).
 NOTE: Hadoop 2 image uses the same port numbers as Hadoop 3:
 
 - `9820:9820` - HDFS IPC
-- `9870:9870` - WebHDFS
-- `9864:9864` - Datanode UI
-- `9867:9867` - Datanode IPC
+- `9870:9870` - HDFS WebHDFS
 
 if `WITH_HIVE_SERVER=true`:
-  - `8030:8030` - Scheduler
   - `8042:8042` - NodeManager UI
-  - `8050:8050` - ResourceManager IPC
   - `8088:8088` - Yarn UI
-  - `8188:8188` - Timeline server
-  - `10020:10020` - MapReduce JobServer
   - `19888:19888` - MapReduce JobServer History
   - `10000:10000` - Hive server
+  - `10002:10002` - Hive Admin UI
 
-if `WITH_HIVE_SERVER=true`:
+if `WITH_HIVE_METASTORE_SERVER=true`:
   - `9083:9083` - Hive Metastore server
 
 ### Configuration
@@ -268,7 +261,7 @@ See Yarn image documentation.
 * `export HIVE_SERVER2_HEAPSIZE=512` - max JVM memory in megabytes for Hive server
 * `export HIVE_METASTORE_HEAPSIZE=256` - max JVM memory in megabytes for Hive metastore server
 
-See https://mr3docs.datamonad.com/docs/hadoop/guide/run-hiveserver2/
+See https://www.alibabacloud.com/help/en/emr/emr-on-ecs/user-guide/modify-the-memory-parameters-of-hive
 
 
 ## Development
