@@ -17,7 +17,7 @@ jobs:
         include:
         - hadoop-major-version: 2
           hadoop-version: 2.7.3
-          hive-version: 2.1.1
+          hive-version: 2.3.9
         - hadoop-major-version: 3
           hadoop-version: 3.3.5
           hive-version: 3.1.3

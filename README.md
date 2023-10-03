@@ -179,7 +179,7 @@ All-in-one Hive container with:
 
 ### Versions
 
-* `mtsrus/hadoop:hadoop2.7.3-hive2.1.1`
+* `mtsrus/hadoop:hadoop2.7.3-hive2.3.9`
 * `mtsrus/hadoop:hadoop2-hive` - same as above
 
 * `mtsrus/hadoop:hadoop3.3.5-hive3.1.3`

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+* [DOP-6758] Update Hive to 2.3.9 for Hadoop 2.x
+
 ## 1.4.0
 
 * [DOP-4594] Revert: Upgrade hdfs data during start
