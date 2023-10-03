@@ -258,7 +258,7 @@ See Yarn image documentation.
 
 #### `/var/hive/conf/hive-env.sh` environment variables
 
-* `export HIVE_SERVER2_HEAPSIZE=512` - max JVM memory in megabytes for Hive server
+* `export HIVE_SERVER2_HEAPSIZE=256` - max JVM memory in megabytes for Hive server
 * `export HIVE_METASTORE_HEAPSIZE=256` - max JVM memory in megabytes for Hive metastore server
 
 See https://www.alibabacloud.com/help/en/emr/emr-on-ecs/user-guide/modify-the-memory-parameters-of-hive
