@@ -2,7 +2,7 @@
 
 [![Repo Status](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Build Status](https://github.com/MobileTeleSystems/hadoop-docker/workflows/Test%20build/badge.svg)](https://github.com/MobileTeleSystems/hadoop-docker/actions)
-[![Docker Image Version](https://img.shields.io/docker/v/mtsrus/hadoop)](https://hub.docker.com/r/mtsrus/hadoop)
+[![Docker Image Version](https://img.shields.io/badge/docker-pull-blue)](https://hub.docker.com/r/mtsrus/hadoop)
 
 **Test purpose only!**
 
