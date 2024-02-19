@@ -7,7 +7,7 @@ services:
     container_name: hive
     hostname: hive
     depends_on:
-    - postgres
+      - postgres
     environment:
       WITH_HIVE_SERVER: 'true'
       WITH_HIVE_METASTORE_SERVER: 'true'
@@ -16,20 +16,20 @@ services:
       HIVE_METASTORE_DB_USER: hive
       HIVE_METASTORE_DB_PASSWORD: hive
     ports:
-    - 9820:9820  # HDFS IPC
-    - 9870:9870  # HDFS WebHDFS
+      - 9820:9820 # HDFS IPC
+      - 9870:9870 # HDFS WebHDFS
     # if WITH_HIVE_SERVER=true
-    - 8088:8088  # Yarn UI
-    - 8042:8042  # NodeManager UI
-    - 10000:10000  # Hive server
-    - 10002:10002  # Hive server Admin UI
-    - 19888:19888  # MapReduce JobServer History UI
+      - 8088:8088 # Yarn UI
+      - 8042:8042 # NodeManager UI
+      - 10000:10000 # Hive server
+      - 10002:10002 # Hive server Admin UI
+      - 19888:19888 # MapReduce JobServer History UI
     # if WITH_HIVE_METASTORE_SERVER=true
-    - 9083:9083  # Hive Metastore server
+      - 9083:9083 # Hive Metastore server
     volumes:
       # put some .xml files in /var/hive/conf/ to override defaults
-    - ./conf/hive/:/var/hive/conf/
-    - hadoop-data:/var/hadoop/data/
+      - ./conf/hive/:/var/hive/conf/
+      - hadoop-data:/var/hadoop/data/
 
   postgres:
     image: postgres:alpine
@@ -39,9 +39,9 @@ services:
       POSTGRES_USER: hive
       POSTGRES_PASSWORD: hive
     ports:
-    - 5432:5432
+      - 5432:5432
     volumes:
-    - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
 
 volumes:
   hadoop-data:
