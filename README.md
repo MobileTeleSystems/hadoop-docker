@@ -262,29 +262,3 @@ See Yarn image documentation.
 * `export HIVE_METASTORE_HEAPSIZE=256` - max JVM memory in megabytes for Hive metastore server
 
 See https://www.alibabacloud.com/help/en/emr/emr-on-ecs/user-guide/modify-the-memory-parameters-of-hive
-
-
-## Development
-
-### Clone repo
-
-Clone repo:
-
-```bash
-  git clone git@github.com:MobileTeleSystems/hadoop-docker.git -b main
-
-  cd hadoop-docker
-```
-
-### Enable pre-commit hooks
-Install pre-commit hooks:
-
-```bash
-  pre-commit install --install-hooks
-```
-
-Test pre-commit hooks run:
-
-```bash
-  pre-commit run
-```
