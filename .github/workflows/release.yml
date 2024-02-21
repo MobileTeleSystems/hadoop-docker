@@ -95,3 +95,13 @@ jobs:
             linux/amd64
             linux/arm64/v8
           provenance: mode=max
+
+      - name: Update DockerHub Description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          # this requires token with read+write+delete permissions. read+write is not enough!
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: mtsrus/hadoop
+          short-description: ${{ github.event.repository.description }}
+          enable-url-completion: true
