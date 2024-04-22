@@ -50,8 +50,8 @@ jobs:
             HADOOP_VERSION=${{ matrix.hadoop-version }}
           pull: true
           push: true
-          cache-to: type=gha,mode=max
-          cache-from: type=gha
+          cache-to: type=inline
+          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hdfs
           platforms: |
             linux/amd64
             linux/arm64/v8
@@ -69,8 +69,8 @@ jobs:
             BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hdfs
           pull: true
           push: true
-          cache-to: type=gha,mode=max
-          cache-from: type=gha
+          cache-to: type=inline
+          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-yarn
           platforms: |
             linux/amd64
             linux/arm64/v8
@@ -89,8 +89,8 @@ jobs:
             BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-yarn
           pull: true
           push: true
-          cache-to: type=gha,mode=max
-          cache-from: type=gha
+          cache-to: type=inline
+          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
           platforms: |
             linux/amd64
             linux/arm64/v8

@@ -48,6 +48,7 @@ jobs:
             HADOOP_VERSION=${{ matrix.hadoop-version }}
           pull: true
           push: false
+          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hdfs
 
       - name: Test HDFS
         run: |
@@ -77,6 +78,7 @@ jobs:
           build-args: |
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hdfs
           push: false
+          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-yarn
 
       - name: Test Yarn
         run: |
@@ -101,12 +103,13 @@ jobs:
       - name: Build Hive
         uses: docker/build-push-action@v5
         with:
-          tags: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive
+          tags: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}
           context: ./hive
           build-args: |
             HIVE_VERSION=${{ matrix.hive-version }}
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-yarn
           push: false
+          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
 
       - name: Test Hive
         run: |
@@ -118,7 +121,7 @@ jobs:
         env:
           COMPOSE_FILE: hive/docker-compose.yml
           COMPOSE_PROJECT_NAME: ${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive
-          HIVE_IMAGE: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive
+          HIVE_IMAGE: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}
 
       - name: Shutdown Hive
         if: always()
