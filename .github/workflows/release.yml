@@ -39,7 +39,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build HDFS
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: |
             mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hdfs
@@ -58,7 +58,7 @@ jobs:
           provenance: mode=max
 
       - name: Build Yarn
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: |
             mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-yarn
@@ -77,7 +77,7 @@ jobs:
           provenance: mode=max
 
       - name: Build Hive
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           tags: |
             mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
