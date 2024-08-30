@@ -36,7 +36,7 @@
     <!--
       Hadoop 2 have different port numbers than Hadoop 3:
         https://hadoop.apache.org/docs/r2.7.3/hadoop-yarn/hadoop-yarn-common/yarn-default.xml
-        https://hadoop.apache.org/docs/r3.3.5/hadoop-yarn/hadoop-yarn-common/yarn-default.xml
+        https://hadoop.apache.org/docs/r3.3.6/hadoop-yarn/hadoop-yarn-common/yarn-default.xml
 
       Prefer Hadoop 3 ports for unification.
     -->

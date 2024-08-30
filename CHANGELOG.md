@@ -2,6 +2,7 @@
 
 ## 1.7.0
 
+* Update Hadoop 3.x to 3.3.6
 * Update Hive to 2.3.10 for Hadoop 2.x
 * Set ``yarn.nodemanager.hostname`` and ``yarn.resourcemanager.hostname`` to container hostname
 
