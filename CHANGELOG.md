@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.0
+
+* Update Hive to 2.3.10 for Hadoop 2.x
+* Set ``yarn.nodemanager.hostname`` and ``yarn.resourcemanager.hostname`` to container hostname
+
 ## 1.6.0
 
 * [DOP-6758] Add Hive Metastore server to hive image. It is started by default, but can be disabled by passing `WITH_HIVE_METASTORE_SERVER=false`

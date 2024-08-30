@@ -176,7 +176,7 @@ All-in-one Hive container with:
 
 ### Versions
 
-* `mtsrus/hadoop:hadoop2.7.3-hive2.3.9`
+* `mtsrus/hadoop:hadoop2.7.3-hive2.3.10`
 * `mtsrus/hadoop:hadoop2-hive` - same as above
 
 * `mtsrus/hadoop:hadoop3.3.5-hive3.1.3`
