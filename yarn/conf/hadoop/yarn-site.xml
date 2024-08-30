@@ -14,6 +14,22 @@
 -->
 <configuration>
     <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>{{hostname}}</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.hostname</name>
+        <value>{{hostname}}</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.bind-host</name>
+        <value>0.0.0.0</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.bind-host</name>
+        <value>0.0.0.0</value>
+    </property>
+    <property>
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
