@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'MobileTeleSystems/hadoop-docker'  # prevent running on forks
 
+    permissions:
+      contents: read
+
     strategy:
       fail-fast: false
       matrix:
