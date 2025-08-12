@@ -39,7 +39,7 @@ jobs:
           driver: docker
 
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Build HDFS
         id: build-hdfs
