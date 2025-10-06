@@ -100,7 +100,7 @@ jobs:
           provenance: mode=max
 
       - name: Update DockerHub Description
-        uses: peter-evans/dockerhub-description@v4
+        uses: peter-evans/dockerhub-description@v5
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           # this requires token with read+write+delete permissions. read+write is not enough!
