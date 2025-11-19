@@ -6,7 +6,7 @@ set -e
 rm -rf /opt/hadoop/logs/hadoop-root-namenode-*.out || true
 rm -rf /opt/hadoop/logs/hadoop-root-datanode-*.out || true
 
-if [[ -n $(find /var/hadoop/data/namenode/current -type f -name "fsimage*" -maxdepth 1) ]]; then
+if [[ -n $(find /var/hadoop/data/namenode/current -type f -name "fsimage*" -maxdepth 1 2>/dev/null || true) ]]; then
     echo "--------------- FORMATTING DATA DIRECTORY ---------------"
     $HADOOP_HOME/bin/hdfs namenode 2>&1 -format -nonInteractive | sed 's/^/| HDFS | /g' || true
 fi
