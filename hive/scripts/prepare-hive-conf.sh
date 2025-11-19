@@ -4,7 +4,7 @@ echo "#################################"
 echo "##      PATCHING HIVE CONF     ##"
 echo "#################################"
 
-cp /var/hive/conf/* ${HIVE_HOME}/conf/ || true
+cp /var/hive/conf/* ${HIVE_HOME}/conf/ 2>/dev/null || true
 sed -i "s/{{hostname}}/$(hostname)/g" ${HIVE_HOME}/conf/* || true
 sed -i "s#{{HIVE_METASTORE_DB_URL}}#${HIVE_METASTORE_DB_URL:-jdbc:postgresql://postgres:5432/metastore}#g" ${HIVE_HOME}/conf/* || true
 sed -i "s/{{HIVE_METASTORE_DB_DRIVER}}/${HIVE_METASTORE_DB_DRIVER:-org.postgresql.Driver}/g" ${HIVE_HOME}/conf/* || true
