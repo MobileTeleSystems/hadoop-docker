@@ -65,6 +65,13 @@ jobs:
           COMPOSE_PROJECT_NAME: ${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hdfs
           HDFS_IMAGE: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hdfs
 
+      - name: Dump HDFS logs on failure
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          images: mtsrus/hadoop
+          dest: ./logs
+
       - name: Shutdown HDFS
         if: always()
         run: |
@@ -94,6 +101,13 @@ jobs:
           COMPOSE_FILE: yarn/docker-compose.yml
           COMPOSE_PROJECT_NAME: ${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-yarn
           YARN_IMAGE: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-yarn
+
+      - name: Dump YARN logs on failure
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          images: mtsrus/hadoop
+          dest: ./logs
 
       - name: Shutdown Yarn
         if: always()
@@ -126,6 +140,13 @@ jobs:
           COMPOSE_PROJECT_NAME: ${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive
           HIVE_IMAGE: mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}
 
+      - name: Dump Hive logs on failure
+        if: failure()
+        uses: jwalton/gh-docker-logs@v2
+        with:
+          images: mtsrus/hadoop
+          dest: ./logs
+
       - name: Shutdown Hive
         if: always()
         run: |
@@ -133,6 +154,13 @@ jobs:
         env:
           COMPOSE_FILE: hive/docker-compose.yml
           COMPOSE_PROJECT_NAME: ${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive
+
+      - name: Upload container logs
+        uses: actions/upload-artifact@v5
+        if: failure()
+        with:
+          name: hadoop-logs
+          path: logs/*
 
   all_done:
     name: Tests done
