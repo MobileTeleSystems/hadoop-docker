@@ -1,9 +1,9 @@
 ARG BASE_IMAGE=mtsrus/hadoop:hadoop2-yarn
 
-FROM alpine:3.17.3 AS hive-cache
+FROM alpine:3.22.2 AS hive-cache
 
 ARG HIVE_VERSION=2.3.10
-ENV HIVE_HOME /opt/hive
+ENV HIVE_HOME=opt/hive
 
 RUN wget https://dlcdn.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz || wget https://archive.apache.org/dist/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz && \
     tar -xzf apache-hive-${HIVE_VERSION}-bin.tar.gz && \

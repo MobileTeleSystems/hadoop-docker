@@ -1,14 +1,13 @@
 FROM eclipse-temurin:8-jre
 
+RUN apt-get update && apt-get install --no-install-recommends -y openssh-client openssh-server less
+
 ARG HADOOP_VERSION=2.7.3
 ENV HADOOP_VERSION=$HADOOP_VERSION
 
-ENV HADOOP_HOME /opt/hadoop
-ENV HADOOP_CONF_DIR /etc/hadoop
-ENV PATH $PATH:$HADOOP_HOME/bin
-ENV LD_LIBRARY_PATH $HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
-
-RUN apt-get update && apt-get install --no-install-recommends -y openssh-client openssh-server less
+ENV HADOOP_HOME=/opt/hadoop
+ENV PATH=$PATH:$HADOOP_HOME/bin
+ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 
 RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz || wget http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
     tar -xzf hadoop-${HADOOP_VERSION}.tar.gz && \
@@ -51,6 +50,7 @@ EXPOSE 9864
 # Datanode IPC port
 EXPOSE 9867
 
+ENV HADOOP_CONF_DIR=/etc/hadoop
 COPY conf/hadoop/* $HADOOP_CONF_DIR/
 COPY scripts/ /scripts/
 COPY *.sh /
