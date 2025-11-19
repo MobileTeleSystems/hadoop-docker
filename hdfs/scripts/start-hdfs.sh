@@ -17,5 +17,8 @@ $HADOOP_HOME/sbin/start-dfs.sh 2>&1 | sed 's/^/| HDFS | /g'
 tail -F -n 1000 /opt/hadoop/logs/hadoop-root-namenode-*.out | sed 's/^/| NAMENODE | /g' &
 tail -F -n 1000 /opt/hadoop/logs/hadoop-root-datanode-*.out | sed 's/^/| DATANODE | /g' &
 
+# Check namenode is ready
 /wait-for-it.sh -h localhost -p 9820 -t $WAIT_TIMEOUT_SECONDS
+# Check datanode is ready
+/wait-for-it.sh -h localhost -p 9867 -t $WAIT_TIMEOUT_SECONDS
 echo "--------------- HDFS NODES READY ---------------"
