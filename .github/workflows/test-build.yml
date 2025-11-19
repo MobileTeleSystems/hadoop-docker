@@ -41,15 +41,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
-      - name: Cache pip
-        uses: actions/cache@v4
-        with:
-          path: /tmp/docker-cache
-          key: ${{ runner.os }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}-${{ hashFiles('hdfs/**', 'hive/**', 'yarn/**') }}
-          restore-keys: |
-            ${{ runner.os }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}-${{ hashFiles('hdfs/**', 'hive/**', 'yarn/**') }}
-            ${{ runner.os }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}-
-
       - name: Build HDFS
         id: build-hdfs
         uses: docker/build-push-action@v6
@@ -60,8 +51,6 @@ jobs:
             HADOOP_VERSION=${{ matrix.hadoop-version }}
           pull: true
           push: false
-          cache-to: type=local,dest=/tmp/docker-cache
-          cache-from: type=local,src=/tmp/docker-cache
 
       - name: Test HDFS
         run: |
@@ -98,8 +87,6 @@ jobs:
           build-args: |
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hdfs
           push: false
-          cache-to: type=local,dest=/tmp/docker-cache
-          cache-from: type=local,src=/tmp/docker-cache
 
       - name: Test Yarn
         run: |
@@ -137,8 +124,6 @@ jobs:
             HIVE_VERSION=${{ matrix.hive-version }}
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-yarn
           push: false
-          cache-to: type=local,dest=/tmp/docker-cache
-          cache-from: type=local,src=/tmp/docker-cache
 
       - name: Test Hive
         run: |
