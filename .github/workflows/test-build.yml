@@ -51,7 +51,8 @@ jobs:
             HADOOP_VERSION=${{ matrix.hadoop-version }}
           pull: true
           push: false
-          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hdfs
+          cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hdfs
+          cache-to: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hdfs,mode=max
 
       - name: Test HDFS
         run: |
@@ -88,7 +89,8 @@ jobs:
           build-args: |
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hdfs
           push: false
-          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-yarn
+          cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-yarn
+          cache-to: type=gha,scope=hadoop${{ matrix.hadoop-version }}-yarn,mode=max
 
       - name: Test Yarn
         run: |
@@ -126,7 +128,8 @@ jobs:
             HIVE_VERSION=${{ matrix.hive-version }}
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-yarn
           push: false
-          cache-from: mtsrus/hadoop:hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
+          cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
+          cache-to: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }},mode=max
 
       - name: Test Hive
         run: |
