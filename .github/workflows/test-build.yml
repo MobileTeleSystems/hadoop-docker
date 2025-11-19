@@ -49,7 +49,9 @@ jobs:
             HADOOP_VERSION=${{ matrix.hadoop-version }}
           pull: true
           push: false
-          load: true
+          outputs: |
+            type=docker
+            type=image
           cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hdfs
           cache-to: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hdfs,mode=max
 
@@ -88,7 +90,9 @@ jobs:
           build-args: |
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hdfs
           push: false
-          load: true
+          outputs: |
+            type=docker
+            type=image
           cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-yarn
           cache-to: type=gha,scope=hadoop${{ matrix.hadoop-version }}-yarn,mode=max
 
@@ -128,7 +132,9 @@ jobs:
             HIVE_VERSION=${{ matrix.hive-version }}
             BASE_IMAGE=mtsrus/hadoop:${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-yarn
           push: false
-          load: true
+          outputs: |
+            type=docker
+            type=image
           cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
           cache-to: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }},mode=max
 
