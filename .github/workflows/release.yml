@@ -38,6 +38,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: /tmp/docker-cache
+          key: ${{ runner.os }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}-${{ hashFiles('hdfs/**', 'hive/**', 'yarn/**') }}
+          restore-keys: |
+            ${{ runner.os }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}-${{ hashFiles('hdfs/**', 'hive/**', 'yarn/**') }}
+            ${{ runner.os }}-hadoop${{ matrix.hadoop-major-version }}-hive${{ matrix.hive-version }}-
+
       - name: Checkout code
         uses: actions/checkout@v5
 
@@ -53,7 +62,7 @@ jobs:
             HADOOP_VERSION=${{ matrix.hadoop-version }}
           pull: true
           push: true
-          cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hdfs
+          cache-from: type=local,src=/tmp/docker-cache
           platforms: |
             linux/amd64
             linux/arm64/v8
@@ -71,7 +80,7 @@ jobs:
             BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-hdfs
           pull: true
           push: true
-          cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-yarn
+          cache-from: type=local,src=/tmp/docker-cache
           platforms: |
             linux/amd64
             linux/arm64/v8
@@ -90,7 +99,7 @@ jobs:
             BASE_IMAGE=mtsrus/hadoop:${{ github.ref_name }}-hadoop${{ matrix.hadoop-version }}-yarn
           pull: true
           push: true
-          cache-from: type=gha,scope=hadoop${{ matrix.hadoop-version }}-hive${{ matrix.hive-version }}
+          cache-from: type=local,src=/tmp/docker-cache
           platforms: |
             linux/amd64
             linux/arm64/v8
