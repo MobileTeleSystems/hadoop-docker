@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.1
+
+* Fix running images on ARM architecture (Mac OS M chips).
+* Fix HDFS namenode trying to create fsimage on every startup.
+* Make namenode, datanode and yarn logs more verbose on Hadoop 3.x image tag.
+
 ## 1.7.0
 
 * Update Hadoop 3.x to 3.3.6
