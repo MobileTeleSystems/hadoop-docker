@@ -5,6 +5,17 @@ reports, improving documentation, submitting feature requests, reviewing
 new submissions, or contributing code that can be incorporated into the
 project.
 
+## Review process
+
+For any **significant** changes please create a new GitHub issue and
+enhancements that you wish to make. Describe the feature you would like
+to see, why you need it, and how it will work. Discuss your ideas
+transparently and get community feedback before proceeding.
+
+Small changes can directly be crafted and submitted to the GitHub
+Repository as a Pull Request. This requires creating a **repo fork** using
+[instruction](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+
 ## Initial setup for local development
 
 ### Install Git
@@ -12,20 +23,12 @@ project.
 Please follow
 [instruction](https://docs.github.com/en/get-started/quickstart/set-up-git).
 
-## Create a fork
-
-If you are not a member of a development team building hadoop-docker,
-you should create a fork before making any changes.
-
-Please follow
-[instruction](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
-
 ### Clone the repo
 
 Open terminal and run these commands:
 
 ```bash
-git clone https://github.com/MobileTeleSystems/hadoop-docker
+git clone git@github.com:myuser/hadoop-docker.git
 
 cd hadoop-docker
 ```
@@ -37,7 +40,13 @@ repository content before making new commit. It allows to run linters,
 formatters, fix file permissions and so on. If something is wrong,
 changes cannot be committed.
 
-Firstly, install pre-commit hooks:
+Firstly, install pre-commit:
+
+```bash
+pip install pre-commit
+```
+
+Then install pre-commit hooks:
 
 ```bash
 pre-commit install --install-hooks
@@ -74,21 +83,8 @@ cd hive
 docker-compose build
 ```
 
-Note: images should be build one-by-one and in the same order as described before.
-
-## Review process
-
-Please create a new GitHub issue for any significant changes and
-enhancements that you wish to make. Provide the feature you would like
-to see, why you need it, and how it will work. Discuss your ideas
-transparently and get community feedback before proceeding.
-
-Significant Changes that you wish to contribute to the project should be
-discussed first in a GitHub issue that clearly outlines the changes and
-benefits of the feature.
-
-Small Changes can directly be crafted and submitted to the GitHub
-Repository as a Pull Request.
+Note: images should be build one-by-one and in the same order as described before,
+as next one depends on previous.
 
 ### Create pull request
 
@@ -106,6 +102,8 @@ After pull request is created, it get a corresponding number, e.g. 123
 (`pr_number`).
 
 ## Release Process
+
+Note: this is only for repo maintainers
 
 Just add tag with desired version number to ``master`` branch:
 
