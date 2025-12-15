@@ -153,7 +153,7 @@ jobs:
           COMPOSE_PROJECT_NAME: ${{ github.run_id }}-hadoop${{ matrix.hadoop-major-version }}-hive
 
       - name: Upload container logs
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: failure()
         with:
           name: hadoop-logs
