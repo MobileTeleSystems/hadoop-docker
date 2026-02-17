@@ -1,6 +1,12 @@
 FROM eclipse-temurin:8-jre
 
-RUN apt-get update && apt-get install --no-install-recommends -y openssh-client openssh-server less
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        openssh-client \
+        openssh-server \
+        less \
+    && rm -rf /var/lib/apt/lists/* /var/cache/* \
+    && java -version
 
 ARG HADOOP_VERSION=2.7.3
 ENV HADOOP_VERSION=$HADOOP_VERSION
