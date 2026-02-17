@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.7.2
+
+Update base Java docker image.
+
 ## 1.7.1
 
 * Fix running images on ARM architecture (Mac OS M chips).
